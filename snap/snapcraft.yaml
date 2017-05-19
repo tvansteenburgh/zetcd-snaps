@@ -1,0 +1,40 @@
+name: zetcd
+version: '0.0.1'
+summary: A ZooKeeper "personality" for etcd
+description: |
+  Serves the Apache Zookeeper API, but backed by an etcd cluster.
+  Point a ZooKeeper client at zetcd to dispatch the operations on
+  an etcd cluster.
+confinement: strict
+grade: devel
+
+apps:
+  zetcd:
+    command: zetcd
+    plugs: [ network, network-bind ]
+  zkctl:
+    command: zkctl
+    plugs: [ network ]
+    aliases:
+      - zkctl
+
+parts:
+  go:
+    source-tag: go1.8
+  etcd:
+    source: http://github.com/coreos/zetcd.git
+    source-tag: master
+    plugin: go
+    go-importpath: github.com/coreos/zetcd
+    build: |
+      go get github.com/coreos/zetcd/cmd/zetcd
+      go get github.com/coreos/zetcd/cmd/zkctl
+    install: |
+      pwd
+      cd ../../../
+      pwd
+      cp -R ./go/bin $SNAPCRAFT_PART_INSTALL
+    stage:
+     - bin/zetcd
+     - bin/zkctl
+    after: [go]
