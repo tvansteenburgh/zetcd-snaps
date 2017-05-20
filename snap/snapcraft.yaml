@@ -21,8 +21,8 @@ apps:
 parts:
   go:
     source-tag: go1.8
-  etcd:
-    source: http://github.com/coreos/zetcd.git
+  zetcd:
+    source: https://github.com/coreos/zetcd.git
     source-tag: master
     plugin: go
     go-importpath: github.com/coreos/zetcd
