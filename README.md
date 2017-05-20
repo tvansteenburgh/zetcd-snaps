@@ -1,5 +1,5 @@
 # zetcd-snaps
-Snapcraft.yaml for building zetcd snap packages
+Snapcraft.yaml for building [zetcd](https://github.com/coreos/zetcd) snap packages
 
 ## Building
 
